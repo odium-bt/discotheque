@@ -1,6 +1,7 @@
 package modele;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class FichierNumerique extends Album {
     private String format;
@@ -53,6 +54,17 @@ public class FichierNumerique extends Album {
 
     @Override
     public void getSupport() {
-        System.out.println("Fichier numérique");
+        System.out.println("Cet album existe sur un support Fichier numérique");
+    }
+
+    @Override
+    public void afficherDetails() {
+        System.out.println("Fichier numérique. " + nomAlbum +
+                " de l'auteur/groupe " + auteur +
+                " ; Date de parution : " + dateAlbum.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                " ; Nombre d'exemplaires en stock : " + quantite +
+                " ; format : " + format +
+                " ; taille : " + taille +
+                " ; durée (minutes) : " + duree);
     }
 }

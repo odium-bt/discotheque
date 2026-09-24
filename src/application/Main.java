@@ -1,5 +1,7 @@
 package application;
 
+import exceptions.AlbumIntrouvableException;
+import exceptions.DiscothequeVideException;
 import exceptions.SaisieInvalideException;
 
 import static application.Controller.scan;
@@ -37,16 +39,17 @@ public class Main {
                         }
                         break;
                     case 2:
-                        c.supprimerDisque();
+                        c.supprimerAlbum();
                         break;
                     case 3:
                         // TODO Fonction affichage
                         // c.afficherDiscotheque();
                         break;
                     case 4:
-                        // TODO Fonction suppression de tous les albums
-                        // c.viderDiscotheque();
+                        c.viderDiscotheque();
                         break;
+                    case 5:
+                        c.rechercherAlbum();
                     case 0:
                         System.out.println("Fin du programme. Au revoir !");
                         break;
@@ -55,6 +58,10 @@ public class Main {
                 }
 
             } catch (SaisieInvalideException e) {
+                System.err.println(e.getMessage());
+            } catch (DiscothequeVideException e) {
+                System.err.println(e.getMessage());
+            } catch (AlbumIntrouvableException e) {
                 System.err.println(e.getMessage());
             }
 

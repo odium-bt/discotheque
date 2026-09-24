@@ -17,9 +17,6 @@ public class GestionAlbum {
 
     public static void supprimerAlbum(String n) throws DiscothequeVideException {
         Album trouve = null;
-        if (discotheque.isEmpty()) {
-            throw new DiscothequeVideException("La discothèque est vide.");
-        }
         for (Album d : discotheque) {
             if (d.getNomAlbum().equals(n)) {
                 trouve = d; //supprime la première occurence (ne gère pas les doublons)
@@ -57,22 +54,24 @@ public class GestionAlbum {
 
     public static void rechercherAlbumParNom(String n) throws DiscothequeVideException, AlbumIntrouvableException {
         Album trouve = null;
-        if (discotheque.isEmpty()) {
-            throw new DiscothequeVideException("La discothèque est vide.");
-        }
         for (Album d : discotheque) {
-            if (d.getNomAlbum().equals(n)) {
+            if (d.getNomAlbum().equals(n)) { // equals ->sensible à la case!
                 trouve = d;
                 break;
             }
         }
         if (trouve != null) {
             System.out.println("l'album " + trouve.getNomAlbum() + " est enregistré dans la discothèque.");
-            System.out.println("Il existe sur le support ");
             trouve.getSupport();
-            System.out.println(trouve);
+            trouve.afficherDetails();
         } else {
-            throw new AlbumIntrouvableException("!! Erreur : aucun album nommé " + n + " dans la discothèque.");
+            throw new AlbumIntrouvableException("Il n'existe pas d'album nommé " + n + " dans la discothèque.");
+        }
+    }
+
+    public static void EstVideDiscotheque() throws DiscothequeVideException {
+        if (discotheque.isEmpty()) {
+            throw new DiscothequeVideException("La discothèque est vide.");
         }
     }
 
