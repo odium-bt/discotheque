@@ -48,12 +48,12 @@ public class DisqueVinyle extends Album {
 
     @Override
     public void afficherDetails() {
-        System.out.println("Disque vinyle. " + nomAlbum +
-                " de l'auteur/groupe " + auteur +
+        System.out.println("Détails : Titre : " + nomAlbum +
+                " ; Auteur/groupe : " + auteur +
                 " ; Date de parution : " + dateAlbum.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
                 " ; Nombre d'exemplaires en stock : " + quantite +
                 " ; numéro : " + numero +
-                " ; taille : " + taille);
+                " ; taille : " + taille + ".");
     }
 
 
