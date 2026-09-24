@@ -59,12 +59,12 @@ public class FichierNumerique extends Album {
 
     @Override
     public void afficherDetails() {
-        System.out.println("Fichier numérique. " + nomAlbum +
-                " de l'auteur/groupe " + auteur +
+        System.out.println("Détails : Titre : " + nomAlbum +
+                " ; Auteur/groupe : " + auteur +
                 " ; Date de parution : " + dateAlbum.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
                 " ; Nombre d'exemplaires en stock : " + quantite +
                 " ; format : " + format +
                 " ; taille : " + taille +
-                " ; durée (minutes) : " + duree);
+                " ; durée (minutes) : " + duree + ".");
     }
 }
