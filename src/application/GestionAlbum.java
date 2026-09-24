@@ -61,18 +61,17 @@ public class GestionAlbum {
             throw new DiscothequeVideException("La discothèque est vide.");
         }
         for (Album d : discotheque) {
-            if (d.getNomAlbum().equals(n)) {
+            if (d.getNomAlbum().equals(n)) { // equals ->sensible à la case!
                 trouve = d;
                 break;
             }
         }
         if (trouve != null) {
             System.out.println("l'album " + trouve.getNomAlbum() + " est enregistré dans la discothèque.");
-            System.out.println("Il existe sur le support ");
             trouve.getSupport();
-            System.out.println(trouve);
+            trouve.afficherDetails();
         } else {
-            throw new AlbumIntrouvableException("!! Erreur : aucun album nommé " + n + " dans la discothèque.");
+            throw new AlbumIntrouvableException("Il n'existe pas d'album nommé " + n + " dans la discothèque.");
         }
     }
 

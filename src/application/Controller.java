@@ -2,14 +2,12 @@ package application;
 
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
-import exceptions.AlbumDejaExistantException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
 import modele.DisqueVinyle;
 import modele.FichierNumerique;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -27,6 +25,7 @@ public class Controller {
         System.out.println("2. Supprimer un album");
         System.out.println("3. Afficher le contenu de la discotheque");
         System.out.println("4. Vider la discotheque");
+        System.out.println("5. Rechercher un album");
         System.out.println("0. Quitter");
         System.out.print("Choix:");
         return Controller.scan.nextInt();
@@ -75,11 +74,11 @@ public class Controller {
     }
 
     public LocalDate saisieDate() throws SaisieInvalideException {
-        String dateD = saisieStr("Saisissez la date de parution (jj/mm/aaaa) :");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date = null;
         do {
+            String dateD = saisieStr("Saisissez la date de parution (jj/mm/aaaa) :");
             try {
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                 date = LocalDate.parse(dateD, formatter);
             } catch (DateTimeParseException e) {
                 System.out.println("Format invalide. Exemple : 22/09/2026");
@@ -145,14 +144,13 @@ public class Controller {
     }
 
     public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
-        System.out.println("Quel album voulez-vous supprimer ?");
         String nomSupprime = saisieNomA();
         GestionAlbum.supprimerAlbum(nomSupprime);
     }
 
 
-    public void rechercherAlbum(String nom) throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
-        System.out.println("Saisissez le nom de l'album : ");
+    public void rechercherAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
+
         String nomRecherche = saisieNomA();
         GestionAlbum.rechercherAlbumParNom(nomRecherche);
     }
@@ -165,8 +163,6 @@ public class Controller {
     public void viderDiscotheque() {
         GestionAlbum.viderDiscotheque();
     }
-
-
 
 
 }

@@ -1,6 +1,7 @@
 package modele;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class CompactDisque extends Album {
     private String numero;
@@ -42,6 +43,18 @@ public class CompactDisque extends Album {
 
     @Override
     public void getSupport() {
-        System.out.println("CD");
+        System.out.println("Cet album existe sur un support CD");
     }
+
+    @Override
+    public void afficherDetails() {
+        System.out.println("CD. " + nomAlbum +
+                " de l'auteur/groupe " + auteur +
+                " ; Date de parution : " + dateAlbum.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                " ; Nombre d'exemplaires en stock : " + quantite +
+                " ; numéro : " + numero +
+                " ; type : " + type);
+    }
+
+
 }

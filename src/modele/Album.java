@@ -58,5 +58,6 @@ public abstract class Album {
     }
 
     public abstract void getSupport();
+    public abstract void afficherDetails();
 
 }
