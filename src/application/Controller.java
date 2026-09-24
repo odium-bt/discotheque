@@ -113,8 +113,10 @@ public class Controller {
     }
 
 
-    public void rechercherAlbum(String nom) throws  AlbumIntrouvableException, DiscothequeVideException {
-
+    public void rechercherAlbum(String nom) throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
+        System.out.println("Saisissez le nom de l'album : ");
+        String nomRecherche = saisieNomA();
+        GestionAlbum.rechercherAlbumParNom(nomRecherche);
     }
 
 
