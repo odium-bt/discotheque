@@ -1,11 +1,14 @@
 package application;
 
+import exceptions.AlbumIntrouvableException;
+import exceptions.DiscothequeVideException;
 import exceptions.AlbumDejaExistantException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
 import modele.FichierNumerique;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -93,12 +96,16 @@ public class Controller {
         String numero = saisieNum();
         String type = saisieType();
 
-        return new CompactDisque(nomAlbum, a, date, quantite, numero,    type);
+        return new CompactDisque(nomAlbum, a, date, quantite, numero, type);
     }
 
+    public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
+        System.out.println("Quel album voulez-vous supprimer ?");
+        String nomSupprime = saisieNomA();
+        GestionAlbum.supprimerAlbum(nomSupprime);
+    }
 
     public void ajouterDisque() throws AlbumDejaExistantException, SaisieInvalideException {
-
 
         Album d = saisieDisque();
 

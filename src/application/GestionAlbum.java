@@ -1,5 +1,6 @@
 package application;
 
+import exceptions.DiscothequeVideException;
 import modele.Album;
 
 import java.util.ArrayList;
@@ -11,22 +12,29 @@ public class GestionAlbum {
         getDiscotheque().add(d);
     }
 
-    public static void supprimerDisque(String n, String a) {
-        //TODO
+
+    public static void supprimerAlbum(String n) throws DiscothequeVideException {
         Album trouve = null;
+        if(discotheque.isEmpty()){
+            throw new DiscothequeVideException("La discothèque est vide.");
+        }
         for (Album d : discotheque) {
-            if (d.getNomAlbum().equals(n) && d.getAuteur().equals(a.getAuteur())) {
-                trouve = d;
+            if (d.getNomAlbum().equals(n)) {
+                trouve = d; //supprime la première occurence (ne gère pas les doublons)
                 break;
             }
         }
         if (trouve != null) {
-            System.out.println("Disque trouvé");
-            trouve = null;
+            getDiscotheque().remove(trouve);
+            System.out.println("Album supprimé de la discothèque.");
         } else {
-            System.out.println("Disque non trouvé");
+            System.out.println("Album non trouvé.");
         }
     }
+
+public static void rechercherAlbum() {
+
+}
 
     public static ArrayList<Album> getDiscotheque() {
         return discotheque;
@@ -41,4 +49,4 @@ public class GestionAlbum {
     }
 }
 
-}
+
