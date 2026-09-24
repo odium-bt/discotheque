@@ -1,12 +1,12 @@
 import java.time.LocalDate;
 
-public class Album {
+public abstract class Album {
     protected String nomAlbum;
-    protected Auteur auteur;
+    protected String auteur;
     protected LocalDate dateAlbum;
     protected int quantite;
 
-    public Album(String nomAlbum, Auteur auteur, LocalDate dateAlbum, int quantite) {
+    public Album(String nomAlbum, String auteur, LocalDate dateAlbum, int quantite) {
         this.nomAlbum = nomAlbum;
         this.auteur = auteur;
         this.dateAlbum = dateAlbum;
@@ -21,11 +21,11 @@ public class Album {
         this.nomAlbum = nomAlbum;
     }
 
-    public Auteur getAuteur() {
+    public String getAuteur() {
         return auteur;
     }
 
-    public void setAuteur(Auteur auteur) {
+    public void setAuteur(String auteur) {
         this.auteur = auteur;
     }
 
@@ -49,9 +49,11 @@ public class Album {
     public String toString() {
         return "Album{" +
                 "nomAlbum='" + nomAlbum + '\'' +
-                ", auteur=" + auteur +
+                ", auteur='" + auteur + '\'' +
                 ", dateAlbum=" + dateAlbum +
-                ", Quantite=" + quantite +
+                ", quantite=" + quantite +
                 '}';
     }
+
+    public abstract void getSupport();
 }
