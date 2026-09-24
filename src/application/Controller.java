@@ -150,4 +150,23 @@ public class Controller {
         GestionAlbum.supprimerAlbum(nomSupprime);
     }
 
+ 
+    public void rechercherAlbum(String nom) throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
+        System.out.println("Saisissez le nom de l'album : ");
+        String nomRecherche = saisieNomA();
+        GestionAlbum.rechercherAlbumParNom(nomRecherche);
+    }
+
+
+    public void listerAlbum() throws DiscothequeVideException {
+
+    }
+
+    public void viderDiscotheque() {
+        GestionAlbum.viderDiscotheque();
+    }
+
+
+
+
 }

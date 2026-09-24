@@ -37,8 +37,7 @@ public class Main {
                         }
                         break;
                     case 2:
-                        // TODO Fonction supprimer disque
-                        // c.supprimerDisque();
+                        c.supprimerDisque();
                         break;
                     case 3:
                         // TODO Fonction affichage
