@@ -2,13 +2,16 @@ package modele;
 
 import java.time.LocalDate;
 
-public class FichierNumerique extends Album{
+public class FichierNumerique extends Album {
     private String format;
     private double taille;
     private int duree;
 
-    public FichierNumerique(String nomAlbum, String auteur, LocalDate dateAlbum, int quantite) {
+    public FichierNumerique(String nomAlbum, String auteur, LocalDate dateAlbum, int quantite, String format, double taille, int duree) {
         super(nomAlbum, auteur, dateAlbum, quantite);
+        this.format = format;
+        this.taille = taille;
+        this.duree = duree;
     }
 
     public String getFormat() {

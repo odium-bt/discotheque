@@ -1,6 +1,10 @@
 package application;
 
+import exceptions.AlbumDejaExistantException;
+import exceptions.SaisieInvalideException;
 import modele.Album;
+import modele.CompactDisque;
+import modele.FichierNumerique;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -24,31 +28,38 @@ public class Controller {
         return Controller.scan.nextInt();
     }
 
-    public String saisie(String msg) {
+
+    public String saisieStr(String msg) throws SaisieInvalideException {
         String s;
-        do {
-            System.out.print(msg);
-            s = scan.nextLine();
-        } while (s.isEmpty());
+        System.out.print(msg);
+        s = scan.nextLine();
+        if (s.isEmpty()) {
+            throw new SaisieInvalideException("La donnée entrée est invalide");
+        }
         return s;
     }
 
-    public String saisieAuteur() {
-        String a = saisieNom();
-        return a;
+    private int saisieInt(String msg) throws SaisieInvalideException {
+        int s;
+        System.out.print(msg);
+        s = scan.nextInt();
+        if (s < 0) {
+            throw new SaisieInvalideException("La donnée entrée est invalide");
+        }
+        return s;
     }
 
-    public String saisieNom() {
-        return (saisie("Saisissez le nom de l'auteur :"));
+    public String saisieAuteur() throws SaisieInvalideException {
+        return (saisieStr("Saisissez le nom de l'auteur :"));
     }
 
 
-    public String saisieNomD() {
-        return (saisie("Saisissez le nom du disque :"));
+    public String saisieNomA() throws SaisieInvalideException {
+        return (saisieStr("Saisissez le nom de l'album :"));
     }
 
-    public LocalDate saisieDate() {
-        String dateD = saisie("Saisissez la date du disque (jj/mm/aaaa) :");
+    public LocalDate saisieDate() throws SaisieInvalideException {
+        String dateD = saisieStr("Saisissez la date de parution (jj/mm/aaaa) :");
         LocalDate date = null;
         do {
             try {
@@ -61,10 +72,36 @@ public class Controller {
         return date;
     }
 
-    public Album saisieAlbum(Auteur a) {
-        String nomD = saisieNomD();
-        LocalDate date = saisieDate();
+    public int saisieQuantite() throws SaisieInvalideException {
+        return saisieInt("Saisissez le nombre d'exemplaires :");
 
-        return new Album(nomD, a, date);
+    }
+
+    public String saisieNum() throws SaisieInvalideException {
+        return saisieStr("Saisissez le numéro de l'album :");
+    }
+
+    public String saisieType() throws SaisieInvalideException {
+        return saisieStr("Saisissez le type de disque :");
+    }
+
+    public CompactDisque saisieDisque() throws SaisieInvalideException {
+        String nomAlbum = saisieNomA();
+        String a = saisieAuteur();
+        LocalDate date = saisieDate();
+        int quantite = saisieQuantite();
+        String numero = saisieNum();
+        String type = saisieType();
+
+        return new CompactDisque(nomAlbum, a, date, quantite, numero,    type);
+    }
+
+
+    public void ajouterDisque() throws AlbumDejaExistantException, SaisieInvalideException {
+
+
+        Album d = saisieDisque();
+
+        GestionAlbum.creerDisque(d);
     }
 }
