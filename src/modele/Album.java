@@ -58,4 +58,5 @@ public abstract class Album {
     }
 
     public abstract void getSupport();
+
 }
