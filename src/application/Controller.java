@@ -1,6 +1,5 @@
 package application;
 
-import exceptions.AlbumDejaExistantException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
@@ -51,9 +50,9 @@ public class Controller {
         return s;
     }
 
-    private double saisieDouble(String msg) throws SaisieInvalideException {
+    private double saisieTailleD() throws SaisieInvalideException {
         double s;
-        System.out.print(msg);
+        System.out.print("Saisissez la taille du fichier : ");
         s = scan.nextDouble();
         scan.nextLine();
         if (s < 0) {
@@ -108,10 +107,6 @@ public class Controller {
 
     public int saisieTaille() throws SaisieInvalideException {
         return saisieInt("Saisissez la taille du vinyle :");
-    }
-
-    public double saisieTailleD() throws SaisieInvalideException {
-        return saisieDouble("Saisissez la taille du fichier : ");
     }
 
     public void saisieAlbum(int support) throws SaisieInvalideException {

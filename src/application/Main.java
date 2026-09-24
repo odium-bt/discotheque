@@ -1,14 +1,12 @@
 package application;
 
 import exceptions.AlbumDejaExistantException;
-import exceptions.AlbumIntrouvableException;
-import exceptions.DiscothequeVideException;
 import exceptions.SaisieInvalideException;
 
 import static application.Controller.scan;
 
 public class Main {
-    static void main(String[] args) throws AlbumDejaExistantException, SaisieInvalideException {
+    static void main() {
         int choix = 0;
         do {
             try {
