@@ -1,7 +1,9 @@
 package application;
 
+import exceptions.AlbumDejaExistantException;
+
 public class Main {
-    static void main(String[] args) {
+    static void main(String[] args) throws AlbumDejaExistantException {
         int choix;
         do {
             Controller c = new Controller();
@@ -10,8 +12,25 @@ public class Main {
 
             switch (choix) {
                 case 1:
-                    // TODO Fonction ajout d'album
-                    // c.ajouterDisque();
+                    System.out.println("Sur quel support est l'album ?");
+                    System.out.println("1: Disque Compact");
+                    System.out.println("2: Disque Vinyle");
+                    System.out.println("3: Fichier numérique");
+                    int type = Controller.scan.nextInt();
+                    switch (type) {
+                        case 1:
+                            c.ajouterDisque();
+                            break;
+                        case 2:
+                            c.ajouterVinyle();
+                            break;
+                        case 3:
+                            c.ajouterFile();
+                            break;
+                        default:
+                            System.out.println("Choix invalide, veuillez réessayer.");
+                    }
+                    c.ajouterAlbum();
                     break;
                 case 2:
                     // TODO Fonction supprimer disque
