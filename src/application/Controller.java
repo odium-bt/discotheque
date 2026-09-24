@@ -1,11 +1,15 @@
 package application;
 
+import exceptions.AlbumIntrouvableException;
+import exceptions.DiscothequeVideException;
+import exceptions.AlbumDejaExistantException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
 import modele.DisqueVinyle;
 import modele.FichierNumerique;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -139,4 +143,11 @@ public class Controller {
 
         GestionAlbum.creerAlbum(a);
     }
+
+    public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
+        System.out.println("Quel album voulez-vous supprimer ?");
+        String nomSupprime = saisieNomA();
+        GestionAlbum.supprimerAlbum(nomSupprime);
+    }
+
 }
