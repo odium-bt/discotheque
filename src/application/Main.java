@@ -1,6 +1,5 @@
 package application;
 
-import exceptions.AlbumDejaExistantException;
 import exceptions.SaisieInvalideException;
 
 import static application.Controller.scan;
