@@ -1,5 +1,6 @@
 package application;
 
+import exceptions.AlbumIntrouvableException;
 import modele.Album;
 
 import java.time.LocalDate;
@@ -61,10 +62,10 @@ public class Controller {
         return date;
     }
 
-    public Album saisieAlbum(Auteur a) {
-        String nomD = saisieNomD();
-        LocalDate date = saisieDate();
 
-        return new Album(nomD, a, date);
+    public void supprimerAlbum() throws AlbumIntrouvableException {
+        System.out.println("Quel album voulez-vous supprimer ?");
+        String nomSupprime = saisieNomD();
+        GestionAlbum.supprimerAlbum(nomSupprime);
     }
 }

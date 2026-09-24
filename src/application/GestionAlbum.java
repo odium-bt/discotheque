@@ -11,22 +11,24 @@ public class GestionAlbum {
         getDiscotheque().add(d);
     }
 
-    public static void supprimerDisque(String n, String a) {
-        //TODO
+
+    public static void supprimerAlbum(String n) {
         Album trouve = null;
         for (Album d : discotheque) {
-            if (d.getNomAlbum().equals(n) && d.getAuteur().equals(a.getAuteur())) {
-                trouve = d;
+            if (d.getNomAlbum().equals(n)) {
+                trouve = d; //supprime la première occurence (ne gère pas les doublons)
                 break;
             }
         }
         if (trouve != null) {
-            System.out.println("Disque trouvé");
-            trouve = null;
+            getDiscotheque().remove(trouve);
+            System.out.println("Album supprimé de la discothèque.");
         } else {
-            System.out.println("Disque non trouvé");
+            System.out.println("Album non trouvé.");
         }
     }
+
+
 
     public static ArrayList<Album> getDiscotheque() {
         return discotheque;
