@@ -15,7 +15,7 @@ public class GestionAlbum {
 
     public static void supprimerAlbum(String n) throws DiscothequeVideException {
         Album trouve = null;
-        if(discotheque.isEmpty()){
+        if (discotheque.isEmpty()) {
             throw new DiscothequeVideException("La discothèque est vide.");
         }
         for (Album d : discotheque) {
@@ -32,9 +32,9 @@ public class GestionAlbum {
         }
     }
 
-public static void rechercherAlbum() {
+    public static void rechercherAlbum() {
 
-}
+    }
 
     public static ArrayList<Album> getDiscotheque() {
         return discotheque;
@@ -47,6 +47,13 @@ public static void rechercherAlbum() {
     public void afficherDiscotheque() {
         System.out.println(getDiscotheque());
     }
+
+    public static void viderDiscotheque() {
+        discotheque.clear();
+        System.out.println("Discothèque vider !");
+    }
+
+
 }
 
 

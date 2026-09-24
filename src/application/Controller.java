@@ -111,4 +111,22 @@ public class Controller {
 
         GestionAlbum.creerDisque(d);
     }
+
+
+    public void rechercherAlbum(String nom) throws  AlbumIntrouvableException, DiscothequeVideException {
+
+    }
+
+
+    public void listerAlbum() throws DiscothequeVideException {
+
+    }
+
+    public void viderDiscotheque() {
+        GestionAlbum.viderDiscotheque();
+    }
+
+
+
+
 }

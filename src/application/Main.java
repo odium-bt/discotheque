@@ -1,9 +1,12 @@
 package application;
 
 import exceptions.AlbumDejaExistantException;
+import exceptions.AlbumIntrouvableException;
+import exceptions.DiscothequeVideException;
+import exceptions.SaisieInvalideException;
 
 public class Main {
-    static void main(String[] args) throws AlbumDejaExistantException {
+    static void main(String[] args) throws AlbumDejaExistantException, DiscothequeVideException, SaisieInvalideException, AlbumIntrouvableException {
         int choix;
         do {
             Controller c = new Controller();
@@ -33,8 +36,7 @@ public class Main {
                     c.ajouterAlbum();
                     break;
                 case 2:
-                    // TODO Fonction supprimer disque
-                    // c.supprimerDisque();
+                    c.supprimerAlbum();
                     break;
                 case 3:
                     // TODO Fonction affichage
