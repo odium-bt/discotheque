@@ -96,16 +96,16 @@ public class Controller {
         String numero = saisieNum();
         String type = saisieType();
 
-        return new CompactDisque(nomAlbum, a, date, quantite, numero,    type);
+        return new CompactDisque(nomAlbum, a, date, quantite, numero, type);
     }
 
-    public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException {
+    public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
         System.out.println("Quel album voulez-vous supprimer ?");
-        String nomSupprime = saisieNomD();
+        String nomSupprime = saisieNomA();
         GestionAlbum.supprimerAlbum(nomSupprime);
+    }
 
     public void ajouterDisque() throws AlbumDejaExistantException, SaisieInvalideException {
-
 
         Album d = saisieDisque();
 
