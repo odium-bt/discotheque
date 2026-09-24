@@ -1,5 +1,6 @@
 package application;
 
+import exceptions.DiscothequeVideException;
 import modele.Album;
 
 import java.util.ArrayList;
@@ -12,8 +13,11 @@ public class GestionAlbum {
     }
 
 
-    public static void supprimerAlbum(String n) {
+    public static void supprimerAlbum(String n) throws DiscothequeVideException {
         Album trouve = null;
+        if(discotheque.isEmpty()){
+            throw new DiscothequeVideException("La discothèque est vide.");
+        }
         for (Album d : discotheque) {
             if (d.getNomAlbum().equals(n)) {
                 trouve = d; //supprime la première occurence (ne gère pas les doublons)
@@ -28,7 +32,9 @@ public class GestionAlbum {
         }
     }
 
+public static void rechercherAlbum() {
 
+}
 
     public static ArrayList<Album> getDiscotheque() {
         return discotheque;
@@ -43,4 +49,4 @@ public class GestionAlbum {
     }
 }
 
-}
+

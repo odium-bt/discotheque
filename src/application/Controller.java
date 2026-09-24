@@ -1,8 +1,10 @@
 package application;
 
 import exceptions.AlbumIntrouvableException;
+import exceptions.DiscothequeVideException;
 import modele.Album;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -63,7 +65,7 @@ public class Controller {
     }
 
 
-    public void supprimerAlbum() throws AlbumIntrouvableException {
+    public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException {
         System.out.println("Quel album voulez-vous supprimer ?");
         String nomSupprime = saisieNomD();
         GestionAlbum.supprimerAlbum(nomSupprime);
