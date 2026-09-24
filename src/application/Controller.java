@@ -144,13 +144,14 @@ public class Controller {
     }
 
     public void supprimerAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
+        GestionAlbum.EstVideDiscotheque();
         String nomSupprime = saisieNomA();
         GestionAlbum.supprimerAlbum(nomSupprime);
     }
 
 
     public void rechercherAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
-
+        GestionAlbum.EstVideDiscotheque();
         String nomRecherche = saisieNomA();
         GestionAlbum.rechercherAlbumParNom(nomRecherche);
     }
