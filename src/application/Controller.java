@@ -1,5 +1,6 @@
 package application;
 
+import exceptions.AlbumDejaExistantException;
 import modele.Album;
 
 import java.time.LocalDate;
@@ -34,11 +35,6 @@ public class Controller {
     }
 
     public String saisieAuteur() {
-        String a = saisieNom();
-        return a;
-    }
-
-    public String saisieNom() {
         return (saisie("Saisissez le nom de l'auteur :"));
     }
 
@@ -61,10 +57,20 @@ public class Controller {
         return date;
     }
 
-    public Album saisieAlbum(Auteur a) {
+    public Album saisieAlbum() {
         String nomD = saisieNomD();
+        String a = saisieAuteur();
         LocalDate date = saisieDate();
 
         return new Album(nomD, a, date);
+    }
+
+
+    public void ajouterDisque() throws AlbumDejaExistantException {
+
+
+        Album d = saisieAlbum();
+
+        GestionAlbum.creerDisque(d);
     }
 }
