@@ -4,6 +4,7 @@ import exceptions.AlbumDejaExistantException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
+import modele.DisqueVinyle;
 import modele.FichierNumerique;
 
 import java.time.LocalDate;
@@ -43,6 +44,18 @@ public class Controller {
         int s;
         System.out.print(msg);
         s = scan.nextInt();
+        scan.nextLine();
+        if (s < 0) {
+            throw new SaisieInvalideException("La donnée entrée est invalide");
+        }
+        return s;
+    }
+
+    private double saisieDouble(String msg) throws SaisieInvalideException {
+        double s;
+        System.out.print(msg);
+        s = scan.nextDouble();
+        scan.nextLine();
         if (s < 0) {
             throw new SaisieInvalideException("La donnée entrée est invalide");
         }
@@ -85,23 +98,50 @@ public class Controller {
         return saisieStr("Saisissez le type de disque :");
     }
 
-    public CompactDisque saisieDisque() throws SaisieInvalideException {
-        String nomAlbum = saisieNomA();
-        String a = saisieAuteur();
-        LocalDate date = saisieDate();
-        int quantite = saisieQuantite();
-        String numero = saisieNum();
-        String type = saisieType();
-
-        return new CompactDisque(nomAlbum, a, date, quantite, numero,    type);
+    public String saisieFormat() throws SaisieInvalideException {
+        return saisieStr("Saisissez le format du fichier :");
     }
 
+    public int saisieDuree() throws SaisieInvalideException {
+        return saisieInt("Saisissez la durée de l'album :");
+    }
 
-    public void ajouterDisque() throws AlbumDejaExistantException, SaisieInvalideException {
+    public int saisieTaille() throws SaisieInvalideException {
+        return saisieInt("Saisissez la taille du vinyle :");
+    }
 
+    public double saisieTailleD() throws SaisieInvalideException {
+        return saisieDouble("Saisissez la taille du fichier : ");
+    }
 
-        Album d = saisieDisque();
+    public void saisieAlbum(int support) throws SaisieInvalideException {
+        String nomAlbum = saisieNomA();
+        String auteur = saisieAuteur();
+        LocalDate date = saisieDate();
+        int quantite = saisieQuantite();
 
-        GestionAlbum.creerDisque(d);
+        String num;
+
+        Album a = null;
+        switch (support) {
+            case 1:  // Disque
+                num = saisieNum();
+                String type = saisieType();
+                a = new CompactDisque(nomAlbum, auteur, date, quantite, num, type);
+                break;
+            case 2: // Vinyle
+                num = saisieNum();
+                int taille = saisieTaille();
+                a = new DisqueVinyle(nomAlbum, auteur, date, quantite, num, taille);
+                break;
+            case 3:
+                String format = saisieFormat();
+                double tailleFichier = saisieTailleD();
+                int duree = saisieDuree();
+                a = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree);
+                break;
+        }
+
+        GestionAlbum.creerAlbum(a);
     }
 }
