@@ -21,7 +21,7 @@ public class GestionAlbum {
         }
         for (Album d : discotheque) {
             if (d.getNomAlbum().equals(n)) {
-                trouve = d; //supprime la première occurence (ne gère pas les doublons)
+                trouve = d; //supprime la première occurrence (ne gère pas les doublons)
                 break;
             }
         }
