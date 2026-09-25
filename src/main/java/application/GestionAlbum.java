@@ -15,23 +15,10 @@ public class GestionAlbum {
     }
 
 
-    public static void supprimerAlbum(String n) throws DiscothequeVideException {
-        Album trouve = null;
-        for (Album d : discotheque) {
-            if (d.getNomAlbum().equals(n)) {
-                trouve = d; //supprime la première occurrence (ne gère pas les doublons)
-                break;
-            }
-        }
-        if (trouve != null) {
-            getDiscotheque().remove(trouve);
-            System.out.println("Album supprimé de la discothèque.");
-        } else {
-            System.out.println("Album non trouvé.");
-        }
-    }
-
-    public static void rechercherAlbum() {
+    public static void supprimerAlbum(String n) throws DiscothequeVideException, AlbumIntrouvableException {
+        Album a = trouveAlbum(n);
+        getDiscotheque().remove(a); // Supprime la première occurrence
+        System.out.println("Album " + n + " supprimé de la discothèque.");
 
     }
 
@@ -52,21 +39,25 @@ public class GestionAlbum {
         System.out.println("Discothèque vidée !");
     }
 
-    public static void rechercherAlbumParNom(String n) throws DiscothequeVideException, AlbumIntrouvableException {
+    public static Album trouveAlbum(String n) throws AlbumIntrouvableException {
         Album trouve = null;
-        for (Album d : discotheque) {
-            if (d.getNomAlbum().equals(n)) { // equals ->sensible à la case!
-                trouve = d;
+        for (Album a : discotheque) {
+            if (a.getNomAlbum().equals(n)) { // equals ->sensible à la case!
+                trouve = a;
                 break;
             }
         }
-        if (trouve != null) {
-            System.out.println("l'album " + trouve.getNomAlbum() + " est enregistré dans la discothèque.");
-            trouve.getSupport();
-            trouve.afficherDetails();
-        } else {
+        if (trouve == null) {
             throw new AlbumIntrouvableException("Il n'existe pas d'album nommé " + n + " dans la discothèque.");
         }
+        return trouve;
+    }
+
+    public static void rechercherAlbumParNom(String n) throws AlbumIntrouvableException {
+        Album a = trouveAlbum(n);
+        System.out.println("L'album " + a.getNomAlbum() + " est enregistré dans la discothèque.");
+        a.getSupport();
+        a.afficherDetails();
     }
 
 
@@ -87,6 +78,8 @@ public class GestionAlbum {
         }
     }
 
+    public static void lireAlbum() {
+    }
 }
 
 
