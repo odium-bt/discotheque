@@ -2,6 +2,7 @@ package application;
 
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
@@ -247,8 +248,7 @@ public class Controller {
     /**
      * Lecture d'album
      */
-    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException {
+    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException {
         String name = saisieNomA();
-        GestionAlbum.lireAlbum(name);
     }
 }
