@@ -1,8 +1,11 @@
 package application;
 
+import audio.LecteurMP3;
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import modele.Album;
+import modele.FichierNumerique;
 
 import java.util.ArrayList;
 
@@ -78,8 +81,8 @@ public class GestionAlbum {
         }
     }
 
-    public static void lireAlbum(String n) throws AlbumIntrouvableException {
-        Album a = trouveAlbum(n);
+    public static void lireAlbum(String n) throws AlbumIntrouvableException, FichierAudioException {
+
     }
 }
 

@@ -1,13 +1,14 @@
 package audio;
 
 import exceptions.FichierAudioException;
+import javazoom.jl.player.Player;
 import modele.FichierNumerique;
 
 import java.io.File;
 
 public class LecteurMP3 implements Runnable {
 
-        private final FichierNumerique album;
+        private FichierNumerique album;
         private volatile Player player;   // partagé entre deux threads
         private Thread thread;
 
@@ -26,7 +27,7 @@ public class LecteurMP3 implements Runnable {
         }
 
         /** Crée le thread (daemon) et le démarre.
-         Ne fait rien si une lecture est déjà en cours. */
+         Ne fais rien si une lecture est déjà en cours. */
         public void demarrer() { /* TODO */ }
 
         /** Exécuté DANS le thread : ouvre le flux, crée le Player, appelle play(). */
@@ -36,11 +37,15 @@ public class LecteurMP3 implements Runnable {
         /** Arrête la lecture depuis un autre thread : player.close(). */
         public void arreter() { /* TODO */ }
 
-        public boolean estEnCours() { /* TODO : thread.isAlive() */ }
+        public boolean estEnCours() { /* TODO : thread.isAlive() */
+            return false;
+        }
 
         /** Bloque le thread appelant jusqu'à la fin de la lecture : join(). */
         public void attendreFin() throws InterruptedException { /* TODO */ }
 
         /** Position de lecture en millisecondes. */
-        public int getPosition() { /* TODO */ }
+        public int getPosition() { /* TODO */
+            return 0;
+        }
     }
