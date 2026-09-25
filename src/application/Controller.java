@@ -85,7 +85,7 @@ public class Controller {
     }
 
     private double saisieTailleD() throws SaisieInvalideException {
-        double s = 0;
+        double s;
         System.out.print("Saisissez la taille du fichier : ");
         try {
             s = scan.nextDouble();
@@ -112,7 +112,7 @@ public class Controller {
 
     public LocalDate saisieDate() throws SaisieInvalideException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate date = null;
+        LocalDate date;
         String dateD = saisieStr("Saisissez la date de parution (jj/mm/aaaa) : ");
         try {
             date = LocalDate.parse(dateD, formatter);
