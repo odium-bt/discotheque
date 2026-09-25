@@ -19,8 +19,10 @@ public class LecteurMP3 implements Runnable {
             if (!file.exists()) {
                 throw new FichierAudioException("Le fichier n'existe pas");
             }
-
-            
+            if (!file.getName().endsWith(".mp3")) {
+                throw new FichierAudioException("Le fichier n'est pas au format MP3");
+            }
+            return true;
         }
 
         /** Crée le thread (daemon) et le démarre.
