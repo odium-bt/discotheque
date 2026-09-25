@@ -41,8 +41,7 @@ public class Main {
                         c.supprimerAlbum();
                         break;
                     case 3:
-                        // TODO Fonction affichage
-                        // c.afficherDiscotheque();
+                        c.listerAlbum();
                         break;
                     case 4:
                         c.viderDiscotheque();
