@@ -1,5 +1,7 @@
 package application;
 
+import exceptions.AlbumIntrouvableException;
+import exceptions.DiscothequeVideException;
 import exceptions.SaisieInvalideException;
 
 import static application.Controller.scan;
@@ -16,11 +18,12 @@ public class Main {
 
                 switch (choix) {
                     case 1:
+                        int type;
                         System.out.println("Sur quel support est l'album ?");
                         System.out.println("1: Disque Compact");
                         System.out.println("2: Disque Vinyle");
                         System.out.println("3: Fichier numérique");
-                        int type = scan.nextInt();
+                        type = scan.nextInt();
                         scan.nextLine();
                         switch (type) {
                             case 1:
@@ -37,8 +40,8 @@ public class Main {
                         }
                         break;
                     case 2:
-                        // TODO Fonction supprimer disque
-                        // c.supprimerDisque();
+                        // TODO Fonction supprimer album
+                        c.supprimerAlbum();
                         break;
                     case 3:
                         // TODO Fonction affichage
@@ -55,7 +58,7 @@ public class Main {
                         System.out.println("Choix invalide, veuillez réessayer.");
                 }
 
-            } catch (SaisieInvalideException e) {
+            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException e) {
                 System.err.println(e.getMessage());
             }
 
