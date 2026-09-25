@@ -51,7 +51,7 @@ public class Main {
                         break;
                     case 6:
                         // TODO Ecouter un album
-                        //c.ecouterAlbum();
+                        c.lectureAlbum();
                         break;
                     // case ?:
                     //TODO Modifier la quantité d'un album
