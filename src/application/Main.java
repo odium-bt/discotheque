@@ -18,7 +18,7 @@ public class Main {
 
                 switch (choix) {
                     case 1:
-                        int support = 0;
+                        int support;
                         do {
                             support = c.afficherSupports();
                             scan.nextLine();
