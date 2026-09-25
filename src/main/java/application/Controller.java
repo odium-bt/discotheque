@@ -251,7 +251,8 @@ public class Controller {
     /**
      * Lecture d'album
      */
-    public void lectureAlbum() throws SaisieInvalideException {
+    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException {
         String name = saisieNomA();
+        GestionAlbum.lireAlbum(name);
     }
 }
