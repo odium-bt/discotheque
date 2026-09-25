@@ -44,7 +44,7 @@ public class Main {
                         c.listerAlbum();
                         break;
                     case 4:
-                        c.listerAlbumsParSupport();
+                       // c.listerAlbumsParSupport();
                     case 5:
                         c.viderDiscotheque();
                         break;
