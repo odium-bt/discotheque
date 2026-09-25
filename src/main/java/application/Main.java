@@ -50,17 +50,20 @@ public class Main {
                         c.rechercherAlbum();
                         break;
                     case 6:
-                        //TODO Modifier la quantité d'un album
+                        // TODO Ecouter un album
+                        //c.ecouterAlbum();
                         break;
-                    case 7:
-                        //TODO Lister les albums par support
-                        break;
-                    case 8:
-                        //TODO Trier les albums (par auteurs ou par date)
-                        break;
-                    case 9:
-                        //TODO Sauvegarder et recharger la discothèque dans un fichier texte
-                        break;
+                    // case ?:
+                    //TODO Modifier la quantité d'un album
+                    //case 7:
+                    //TODO Lister les albums par support
+                    //break;
+                    //case 8:
+                    //TODO Trier les albums (par auteurs ou par date)
+                    //break;
+                    //case 9:
+                    //TODO Sauvegarder et recharger la discothèque dans un fichier texte
+                    //break;
                     case 0:
                         System.out.println("Fin du programme. Au revoir !");
                         break;

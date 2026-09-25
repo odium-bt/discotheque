@@ -28,10 +28,11 @@ public class Controller {
         System.out.println("3. Afficher le contenu de la discotheque");
         System.out.println("4. Vider la discotheque");
         System.out.println("5. Rechercher un album");
-        System.out.println("6. Modifier la quantité d'un album");
-        System.out.println("7. Lister les albums par support");
-        System.out.println("8. Trier les albums");
-        System.out.println("9. Sauvegarder et recharger la discothèque dans un fichier texte");
+        System.out.println("6. Écouter un album (MP3)");
+        //System.out.println("6. Modifier la quantité d'un album");
+        //System.out.println("7. Lister les albums par support");
+        //System.out.println("8. Trier les albums");
+        //System.out.println("9. Sauvegarder et recharger la discothèque dans un fichier texte");
         System.out.println("0. Quitter");
         System.out.print("Choix:");
         try {
@@ -91,7 +92,7 @@ public class Controller {
 
     private double saisieTailleD() throws SaisieInvalideException {
         double s;
-        System.out.print("Saisissez la taille du fichier (en Mo) : ");
+        System.out.print("Taille du fichier (en Mo) : ");
         try {
             s = scan.nextDouble();
             scan.nextLine();
@@ -107,50 +108,66 @@ public class Controller {
     }
 
     public String saisieAuteur() throws SaisieInvalideException {
-        return (saisieStr("Saisissez le nom de l'auteur : "));
+        return (saisieStr("Nom de l'auteur : "));
     }
 
 
     public String saisieNomA() throws SaisieInvalideException {
-        return (saisieStr("Saisissez le nom de l'album : "));
+        return (saisieStr("Nom de l'album : "));
     }
 
     public LocalDate saisieDate() throws SaisieInvalideException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         LocalDate date;
-        String dateD = saisieStr("Saisissez la date de parution (jj/mm/aaaa) : ");
+        String dateD = saisieStr("Date de parution (jj/mm/aaaa) : ");
         try {
             date = LocalDate.parse(dateD, formatter);
         } catch (DateTimeParseException e) {
             System.out.println("Format invalide. Exemple : 22/09/2026");
             return saisieDate();
         }
+        if (date.isBefore(LocalDate.of(1946, 1, 1))) {
+            System.out.println("La date entrée ne peut pas être trop vieille (entrez une date après 1946).");
+            return saisieDate();
+        }
+        if (date.isAfter(LocalDate.now())) {
+            System.out.println("La date entrée ne peut pas être plus tard que la date actuelle.");
+            return saisieDate();
+        }
         return date;
     }
 
     public int saisieQuantite() throws SaisieInvalideException {
-        return saisieInt("Saisissez le nombre d'exemplaires : ");
+        return saisieInt("Nombre d'exemplaires : ");
 
     }
 
     public String saisieNum() throws SaisieInvalideException {
-        return saisieStr("Saisissez le numéro de l'album : ");
+        return saisieStr("Numéro de l'album : ");
     }
 
     public String saisieType() throws SaisieInvalideException {
-        return saisieStr("Saisissez le type de disque : ");
+        return saisieStr("Type de disque (simple/double) : ");
     }
 
     public String saisieFormat() throws SaisieInvalideException {
-        return saisieStr("Saisissez le format du fichier (ex: mp3) : ");
+        String ext = saisieStr("Format du fichier (ex: mp3) : ").toLowerCase();
+        if (switch (ext) {
+            case "mp3", "flac", "wav", "aac" -> true;
+            default -> false;
+        }) {
+            return ext;
+        } else {
+            throw new SaisieInvalideException("Format de fichier invalide");
+        }
     }
 
     public int saisieDuree() throws SaisieInvalideException {
-        return saisieInt("Saisissez la durée de l'album (en minutes) : ");
+        return saisieInt("Durée de l'album (en minutes) : ");
     }
 
     public int saisieTaille() throws SaisieInvalideException {
-        return saisieInt("Saisissez la taille du vinyle : ");
+        return saisieInt("Taille du vinyle (en cm) : ");
     }
 
     public void saisieAlbum(int support) throws SaisieInvalideException {
@@ -160,7 +177,7 @@ public class Controller {
             case 3 -> "Fichier numérique";
             default -> throw new SaisieInvalideException("Choix de support invalide : " + support);
         };
-        System.out.println("Vous avez choisi : " + name);
+        System.out.println("Type de support choisi : " + name);
         String nomAlbum = saisieNomA();
         String auteur = saisieAuteur();
         LocalDate date = saisieDate();
@@ -231,4 +248,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Lecture d'album
+     */
+    public void lectureAlbum() throws SaisieInvalideException {
+        String name = saisieNomA();
+    }
 }
