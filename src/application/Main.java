@@ -44,9 +44,11 @@ public class Main {
                         c.listerAlbum();
                         break;
                     case 4:
+                        c.listerAlbumsParSupport();
+                    case 5:
                         c.viderDiscotheque();
                         break;
-                    case 5:
+                    case 6:
                         c.rechercherAlbum();
                     case 0:
                         System.out.println("Fin du programme. Au revoir !");
