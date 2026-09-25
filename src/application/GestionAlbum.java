@@ -19,7 +19,7 @@ public class GestionAlbum {
         Album trouve = null;
         for (Album d : discotheque) {
             if (d.getNomAlbum().equals(n)) {
-                trouve = d; //supprime la première occurence (ne gère pas les doublons)
+                trouve = d; //supprime la première occurrence (ne gère pas les doublons)
                 break;
             }
         }
@@ -49,7 +49,7 @@ public class GestionAlbum {
 
     public static void viderDiscotheque() {
         discotheque.clear();
-        System.out.println("Discothèque vider !");
+        System.out.println("Discothèque vidée !");
     }
 
     public static void rechercherAlbumParNom(String n) throws DiscothequeVideException, AlbumIntrouvableException {

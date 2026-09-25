@@ -18,25 +18,24 @@ public class Main {
 
                 switch (choix) {
                     case 1:
-                        System.out.println("Sur quel support est l'album ?");
-                        System.out.println("1: Disque Compact");
-                        System.out.println("2: Disque Vinyle");
-                        System.out.println("3: Fichier numérique");
-                        int type = scan.nextInt();
-                        scan.nextLine();
-                        switch (type) {
-                            case 1:
-                                c.saisieAlbum(1);
-                                break;
-                            case 2:
-                                c.saisieAlbum(2);
-                                break;
-                            case 3:
-                                c.saisieAlbum(3);
-                                break;
-                            default:
-                                System.out.println("Choix invalide, veuillez réessayer.");
-                        }
+                        int support;
+                        do {
+                            support = c.afficherSupports();
+                            scan.nextLine();
+                            switch (support) {
+                                case 1:
+                                    c.saisieAlbum(1);
+                                    break;
+                                case 2:
+                                    c.saisieAlbum(2);
+                                    break;
+                                case 3:
+                                    c.saisieAlbum(3);
+                                    break;
+                                default:
+                                    System.out.println("Choix invalide, veuillez réessayer.");
+                            }
+                        } while (support < 1 || support > 3);
                         break;
                     case 2:
                         c.supprimerAlbum();
@@ -56,11 +55,7 @@ public class Main {
                         System.out.println("Choix invalide, veuillez réessayer.");
                 }
 
-            } catch (SaisieInvalideException e) {
-                System.err.println(e.getMessage());
-            } catch (DiscothequeVideException e) {
-                System.err.println(e.getMessage());
-            } catch (AlbumIntrouvableException e) {
+            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException e) {
                 System.err.println(e.getMessage());
             }
 
