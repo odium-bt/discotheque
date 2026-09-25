@@ -62,7 +62,7 @@ public class Controller {
         System.out.print(msg);
         s = scan.nextLine();
         if (s.isEmpty()) {
-            throw new SaisieInvalideException("La donnée entrée est invalide");
+            throw new SaisieInvalideException("La donnée entrée est invalide !");
         }
         return s;
     }
@@ -74,19 +74,19 @@ public class Controller {
             s = scan.nextInt();
             scan.nextLine();
         } catch (InputMismatchException e) {
-            System.out.println("Merci d'entrer un chiffre");
+            System.out.println("Donnée invalide, veuillez entrer un chiffre.");
             scan.nextLine();
             return saisieInt(msg);
         }
         if (s < 0) {
-            throw new SaisieInvalideException("La donnée entrée est invalide");
+            throw new SaisieInvalideException("La donnée entrée est invalide !");
         }
         return s;
     }
 
     private double saisieTailleD() throws SaisieInvalideException {
         double s;
-        System.out.print("Saisissez la taille du fichier : ");
+        System.out.print("Saisissez la taille du fichier (en Mo) : ");
         try {
             s = scan.nextDouble();
             scan.nextLine();
@@ -137,11 +137,11 @@ public class Controller {
     }
 
     public String saisieFormat() throws SaisieInvalideException {
-        return saisieStr("Saisissez le format du fichier : ");
+        return saisieStr("Saisissez le format du fichier (ex: mp3) : ");
     }
 
     public int saisieDuree() throws SaisieInvalideException {
-        return saisieInt("Saisissez la durée de l'album : ");
+        return saisieInt("Saisissez la durée de l'album (en minutes) : ");
     }
 
     public int saisieTaille() throws SaisieInvalideException {
