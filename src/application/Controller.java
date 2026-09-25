@@ -197,20 +197,19 @@ public class Controller {
         GestionAlbum.supprimerAlbum(nomSupprime);
     }
 
-
     public void rechercherAlbum() throws AlbumIntrouvableException, DiscothequeVideException, SaisieInvalideException {
         GestionAlbum.EstVideDiscotheque();
         String nomRecherche = saisieNomA();
         GestionAlbum.rechercherAlbumParNom(nomRecherche);
     }
 
-
+    // Liste les albums par ordre d'enregistrement
     public void listerAlbum() throws DiscothequeVideException {
         GestionAlbum.EstVideDiscotheque();
         GestionAlbum.listerDiscotheque();
     }
 
-    //Vide complètement la discothèque
+    //Vide complètement la discothèque après confirmation
     public void viderDiscotheque() throws DiscothequeVideException, SaisieInvalideException {
         // Contrôle si la discothèque est vide
         GestionAlbum.EstVideDiscotheque();
