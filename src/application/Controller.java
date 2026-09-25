@@ -158,7 +158,8 @@ public class Controller {
 
 
     public void listerAlbum() throws DiscothequeVideException {
-
+        GestionAlbum.EstVideDiscotheque();
+        GestionAlbum.listerDiscotheque();
     }
 
     public void viderDiscotheque() {
