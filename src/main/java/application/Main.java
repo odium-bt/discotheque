@@ -6,7 +6,7 @@ import exceptions.SaisieInvalideException;
 
 import static application.Controller.scan;
 
-public class Mainb {
+public class Main {
     static void main() {
         int choix = 0;
         do {
