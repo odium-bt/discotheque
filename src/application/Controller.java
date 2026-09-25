@@ -164,7 +164,7 @@ public class Controller {
             case 3 -> "Fichier numérique";
             default -> throw new SaisieInvalideException("Choix de support invalide : " + support);
         };
-
+        System.out.println("Type de support choisi : " + name);
         String nomAlbum = saisieNomA();
         String auteur = saisieAuteur();
         LocalDate date = saisieDate();
