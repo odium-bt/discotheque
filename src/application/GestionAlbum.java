@@ -71,7 +71,7 @@ public class GestionAlbum {
 
 
     public static void EstVideDiscotheque() throws DiscothequeVideException {
-        if (discotheque.isEmpty()) {
+        if (discotheque.isEmpty()) { //ou discotheque.size() < 1
             throw new DiscothequeVideException("La discothèque est vide.");
         }
     }
