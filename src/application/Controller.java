@@ -11,6 +11,7 @@ import modele.FichierNumerique;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Controller {
@@ -156,15 +157,31 @@ public class Controller {
         GestionAlbum.rechercherAlbumParNom(nomRecherche);
     }
 
-
+    // Teste si la discothèque n'est pas vide avant d'afficher la liste des albums
     public void listerAlbum() throws DiscothequeVideException {
         GestionAlbum.EstVideDiscotheque();
         GestionAlbum.listerDiscotheque();
     }
 
-    public void viderDiscotheque() {
-        GestionAlbum.viderDiscotheque();
-    }
+    //Vide complètement la discothèque
+    public void viderDiscotheque() throws DiscothequeVideException, SaisieInvalideException {
+        // Contrôle si la discothèque est vide
+        GestionAlbum.EstVideDiscotheque();
 
+        // Demande de confirmation pour la suppression de toute la collection
+        String r;
+        System.out.println("Voulez-vous vraiment supprimer toute la discothèque ? (oui/non) ");
+        r = scan.nextLine();
+
+        if (Objects.equals(r, "oui")) {
+            // Vidage de la discothèque définitif
+            GestionAlbum.viderDiscotheque();
+        } else if (Objects.equals(r, "non")) {
+            System.out.println("Retour au menu principal.");
+            afficherMenu();
+        } else {
+            throw new SaisieInvalideException("Erreur de saisi");
+        }
+    }
 
 }

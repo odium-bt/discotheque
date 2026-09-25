@@ -56,11 +56,7 @@ public class Main {
                         System.out.println("Choix invalide, veuillez réessayer.");
                 }
 
-            } catch (SaisieInvalideException e) {
-                System.err.println(e.getMessage());
-            } catch (DiscothequeVideException e) {
-                System.err.println(e.getMessage());
-            } catch (AlbumIntrouvableException e) {
+            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException e) {
                 System.err.println(e.getMessage());
             }
 
