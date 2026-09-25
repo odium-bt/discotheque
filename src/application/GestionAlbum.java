@@ -49,7 +49,7 @@ public class GestionAlbum {
 
     public static void viderDiscotheque() {
         discotheque.clear();
-        System.out.println("Discothèque vider !");
+        System.out.println("Discothèque vidée !");
     }
 
     public static void rechercherAlbumParNom(String n) throws DiscothequeVideException, AlbumIntrouvableException {
