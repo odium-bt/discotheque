@@ -78,7 +78,8 @@ public class GestionAlbum {
         }
     }
 
-    public static void lireAlbum() {
+    public static void lireAlbum(String n) throws AlbumIntrouvableException {
+        Album a = trouveAlbum(n);
     }
 }
 
