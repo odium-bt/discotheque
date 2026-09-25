@@ -1,6 +1,7 @@
 package modele;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class DisqueVinyle extends Album {
     private String numero;
@@ -42,7 +43,17 @@ public class DisqueVinyle extends Album {
 
     @Override
     public void getSupport() {
-        System.out.println("Disque vinyle");
+        System.out.println("Cet album existe sur un support Disque vinyle");
+    }
+
+    @Override
+    public void afficherDetails() {
+        System.out.println("Détails : Titre : " + nomAlbum +
+                " ; Auteur/groupe : " + auteur +
+                " ; Date de parution : " + dateAlbum.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")) +
+                " ; Nombre d'exemplaires en stock : " + quantite +
+                " ; numéro : " + numero +
+                " ; taille : " + taille + ".");
     }
 
 

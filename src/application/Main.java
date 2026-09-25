@@ -40,7 +40,6 @@ public class Main {
                         }
                         break;
                     case 2:
-                        // TODO Fonction supprimer album
                         c.supprimerAlbum();
                         break;
                     case 3:
@@ -48,9 +47,10 @@ public class Main {
                         // c.afficherDiscotheque();
                         break;
                     case 4:
-                        // TODO Fonction suppression de tous les albums
-                        // c.viderDiscotheque();
+                        c.viderDiscotheque();
                         break;
+                    case 5:
+                        c.rechercherAlbum();
                     case 0:
                         System.out.println("Fin du programme. Au revoir !");
                         break;
