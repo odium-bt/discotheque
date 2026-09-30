@@ -1,5 +1,6 @@
 package application;
 
+import audio.ConvertisseurAudio;
 import audio.LecteurMP3;
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
@@ -7,10 +8,7 @@ import exceptions.FichierAudioException;
 import modele.Album;
 import modele.FichierNumerique;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 
 public class GestionAlbum {
@@ -85,13 +83,35 @@ public class GestionAlbum {
         }
     }
 
-    public static void lireAlbum(FichierNumerique a) throws AlbumIntrouvableException, FichierAudioException {
-        LecteurMP3 lecteur = new LecteurMP3(); // Initialise le lecteur
+    public static void lireAlbum(String n) throws AlbumIntrouvableException {
+        Album album = trouveAlbum(n);
 
-        Thread thread = new Thread(lecteur, "Lecteur-" + a.getNomAlbum()); // Initialise le thread
-        System.out.println(thread.getName() + ": Thread initialisé");
+        if (album instanceof FichierNumerique) {
+            FichierNumerique fn = (FichierNumerique) album;
+            try {
+                LecteurMP3 lec = new LecteurMP3(fn);
+                lec.demarrer();
+                lec.attendreFin();
+            } catch (FichierAudioException | InterruptedException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Cet album n'est pas un fichier numérique, impossible de le lire.");
+        }
+    }
 
-        thread.start();
+    public static void conversionMp3VersAac(String n) throws AlbumIntrouvableException {
+        Album album = trouveAlbum(n);
+
+        if (album instanceof FichierNumerique fn) {
+            try {
+                ConvertisseurAudio.mp3VersAac(fn);
+            } catch (FichierAudioException | InterruptedException | IOException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Cet album n'est pas un fichier numérique, impossible de le convertir.");
+        }
     }
 }
 
