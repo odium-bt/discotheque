@@ -16,10 +16,17 @@ public class ConvertisseurAudio {
             throw new FichierAudioException("Le fichier n'est pas au format MP3");
         }
 
-        String nouveauChemin = entree.getName().substring(0, entree.getName().lastIndexOf(".")) + "aac";
-        File sortie = new File(nouveauChemin);
+        String nouveauChemin = entree.getName().substring(0, entree.getName().lastIndexOf(".")) + ".aac";
+        File sortie = new File(entree.getParentFile(), nouveauChemin);
 
-        Ffmpeg.convertir(entree, sortie, List.of("-vn", "-c:a", "aac", "-b:a", "192k"));
+        System.out.println("Conversion en cours...");
+
+        if (Ffmpeg.convertir(entree, sortie, List.of("-vn", "-c:a", "aac", "-b:a", "192k")) != 0) {
+            throw new IOException("FFmpeg a échoué");
+        }
+
         album.setFormat(".aac");
+
+        System.out.println("Conversion terminée : " + album.getChemin());
     }
 }
