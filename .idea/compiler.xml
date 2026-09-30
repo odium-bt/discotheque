@@ -6,9 +6,12 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="TpVideoDiscotheque" />
         <module name="TpVideoDiscotheque (1)" />
+        <module name="TpVideoDiscotheque" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Sono" target="26" />
+    </bytecodeTargetLevel>
   </component>
 </project>

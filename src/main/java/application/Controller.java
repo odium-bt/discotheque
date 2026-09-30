@@ -2,6 +2,7 @@ package application;
 
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
@@ -193,11 +194,12 @@ public class Controller {
                 int taille = saisieTaille();
                 a = new DisqueVinyle(nomAlbum, auteur, date, quantite, num, taille);
                 break;
-            case 3:
+            case 3: // Fichier numérique
                 String format = saisieFormat();
                 double tailleFichier = saisieTailleD();
                 int duree = saisieDuree();
-                a = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree);
+                String chemin = saisieStr("Chemin du fichier (ex: media/daftpunk.mp3) : ");
+                a = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree, chemin);
                 break;
         }
 
@@ -247,8 +249,12 @@ public class Controller {
     /**
      * Lecture d'album
      */
-    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException {
+    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException {
         String name = saisieNomA();
-        GestionAlbum.lireAlbum(name);
+        Album a = GestionAlbum.trouveAlbum(name);
+        if (!(a instanceof FichierNumerique f)) {
+            throw new FichierAudioException("Cet album n'est pas un fichier numérique");
+        }
+        GestionAlbum.lireAlbum(f);
     }
 }

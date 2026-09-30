@@ -2,6 +2,7 @@ package application;
 
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 
 import static application.Controller.scan;
@@ -9,10 +10,9 @@ import static application.Controller.scan;
 public class Main {
     static void main() {
         int choix = 0;
+        Controller c = new Controller();
         do {
             try {
-                Controller c = new Controller();
-
                 choix = c.afficherMenu();
                 scan.nextLine();
 
@@ -64,7 +64,8 @@ public class Main {
                         System.out.println("Choix invalide, veuillez réessayer.");
                 }
 
-            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException e) {
+            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException |
+                     FichierAudioException e) {
                 System.err.println(e.getMessage());
             }
 
