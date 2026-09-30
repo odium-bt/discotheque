@@ -1,4 +1,5 @@
 package modele;
+
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -9,11 +10,12 @@ public class FichierNumerique extends Album {
     private int duree;
     private String chemin;
 
-    public FichierNumerique(String nomAlbum, String auteur, LocalDate dateAlbum, int quantite, String format, double taille, int duree) {
+    public FichierNumerique(String nomAlbum, String auteur, LocalDate dateAlbum, int quantite, String format, double taille, int duree, String chemin) {
         super(nomAlbum, auteur, dateAlbum, quantite);
         this.format = format;
         this.taille = taille;
         this.duree = duree;
+        this.chemin = chemin;
     }
 
     public String getFormat() {
@@ -40,9 +42,13 @@ public class FichierNumerique extends Album {
         this.duree = duree;
     }
 
-    public String getChemin() { return chemin; }
+    public String getChemin() {
+        return chemin;
+    }
 
-    public void setChemin(String chemin) { this.chemin = chemin; }
+    public void setChemin(String chemin) {
+        this.chemin = chemin;
+    }
 
     @Override
     public String toString() {

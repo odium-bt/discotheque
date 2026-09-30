@@ -199,7 +199,7 @@ public class Controller {
                 double tailleFichier = saisieTailleD();
                 int duree = saisieDuree();
                 String chemin = saisieStr("Chemin du fichier (ex: music/audio.mp3) : ");
-                FichierNumerique fn = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree);
+                FichierNumerique fn = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree, chemin);
                 fn.setChemin(chemin);
                 a = fn;
                 break;
