@@ -5,12 +5,14 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import modele.FichierNumerique;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 
 public class LecteurMP3 implements Runnable {
 
     private final FichierNumerique album;
-    private volatile Player player;   // partagé entre deux threads
+    private volatile Player player; // partagé entre deux threads
     private Thread thread;
 
     /**
@@ -39,15 +41,11 @@ public class LecteurMP3 implements Runnable {
      * Ne fais rien si une lecture est déjà en cours.
      */
     public void demarrer() {
-        if (estEnCours()) {
-            return;
+        if (!estEnCours()) {
+            thread = new Thread(this, "Lecteur-" + album.getNomAlbum());
+            thread.setDaemon(true);
+            thread.start();
         }
-        this.thread = new Thread(this, "Lecteur-" + album.getNomAlbum()); // Initialise le thread
-        System.out.println(thread.getName() + ": Thread initialisé");
-
-        thread.setDaemon(true);
-        thread.start();
-
     }
 
     /**
@@ -55,15 +53,15 @@ public class LecteurMP3 implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println(Thread.currentThread().getName() + ": début");
+        System.out.println("Début de lecture : " + Thread.currentThread().getName());
 
-        try (InputStream flux = new BufferedInputStream(new FileInputStream(album.getChemin()))) {
+        try (FileInputStream flux = new FileInputStream(album.getFichier())) {
             this.player = new Player(flux);
             player.play();
-            System.out.println(Thread.currentThread().getName() + ": fin");
         } catch (IOException | JavaLayerException e) {
-            System.out.println("!! Erreur : " + e.getMessage());
+            System.out.println("Erreur : " + e.getMessage());
         }
+        System.out.println("Fin de lecture : " + Thread.currentThread().getName());
     }
 
     /**
@@ -74,7 +72,7 @@ public class LecteurMP3 implements Runnable {
     }
 
     public boolean estEnCours() {
-        return thread.isAlive();
+        return thread != null && thread.isAlive();
     }
 
     /**

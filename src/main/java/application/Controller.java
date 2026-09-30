@@ -1,8 +1,7 @@
 package application;
 
-import exceptions.AlbumIntrouvableException;
+import audio.LecteurMP3;import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
-import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
@@ -252,15 +251,17 @@ public class Controller {
     /**
      * Lecture d'album
      */
-    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException {
-        String name = saisieNomA();
-        GestionAlbum.lireAlbum(name);
+    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException {
+        String n = saisieNomA();
+        GestionAlbum.lireAlbum(n);
+    }
+
+    public void arreterLecture() {
+        GestionAlbum.arreterLecture();
     }
 
     public void conversionMp3VersAac() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException, IOException, InterruptedException {
         String n = saisieNomA();
         GestionAlbum.conversionMp3VersAac(n);
     }
-
-    ;
 }

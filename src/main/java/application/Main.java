@@ -2,7 +2,6 @@ package application;
 
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
-import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 
 import java.io.IOException;
@@ -52,11 +51,10 @@ public class Main {
                         c.rechercherAlbum();
                         break;
                     case 6:
-                        // TODO Écouter un album
                         c.lectureAlbum();
                         break;
                     case 7:
-                       // c.arreterLecture();
+                        c.arreterLecture();
                         break;
                     case 8:
                         c.conversionMp3VersAac();
@@ -65,6 +63,7 @@ public class Main {
                     //TODO Lister les albums par support
                     //TODO Trier les albums (par auteurs ou par date)
                     //TODO Sauvegarder et recharger la discothèque dans un fichier texte
+                    //TODO Modifier la quantité d'un album
                     case 0:
                         System.out.println("Fin du programme. Au revoir !");
                         break;
@@ -72,8 +71,7 @@ public class Main {
                         System.out.println("Choix invalide, veuillez réessayer.");
                 }
 
-            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException |
-                     FichierAudioException e) {
+            } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException e) {
                 System.err.println(e.getMessage());
             } catch (IOException | InterruptedException e) {
                 throw new RuntimeException(e);
