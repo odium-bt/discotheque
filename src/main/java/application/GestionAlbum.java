@@ -5,7 +5,6 @@ import audio.LecteurMP3;
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
 import exceptions.FichierAudioException;
-import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.FichierNumerique;
 
@@ -22,7 +21,7 @@ public class GestionAlbum {
     }
 
 
-    public static void supprimerAlbum(String n) throws DiscothequeVideException, AlbumIntrouvableException {
+    public static void supprimerAlbum(String n) throws AlbumIntrouvableException {
         Album a = trouveAlbum(n);
         getDiscotheque().remove(a); // Supprime la première occurrence
         System.out.println("Album " + n + " supprimé de la discothèque.");
@@ -75,26 +74,24 @@ public class GestionAlbum {
     }
 
     public static void listerDiscotheque() {
-        int compt = 1;
+        int count = 1;
         for (Album d : discotheque) {
-            System.out.println("Album n° " + compt);
+            System.out.println("Album n° " + count);
             d.getSupport();
             d.afficherDetails();
             System.out.println(("***"));
-            compt += 1;
+            count += 1;
         }
     }
 
     public static void lireAlbum(String n) throws AlbumIntrouvableException {
         Album album = trouveAlbum(n);
 
-        if (album instanceof FichierNumerique) {
-            FichierNumerique fn = (FichierNumerique) album;
+        if (album instanceof FichierNumerique fn) {
             try {
-                LecteurMP3 lec = new LecteurMP3(fn);
-                lec.demarrer();
-                lec.attendreFin();
-            } catch (FichierAudioException | InterruptedException e) {
+                lecteur = new LecteurMP3(fn);
+                lecteur.demarrer();
+            } catch (FichierAudioException e) {
                 System.out.println("Erreur : " + e.getMessage());
             }
         } else {
