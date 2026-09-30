@@ -14,7 +14,7 @@ public class LecteurMP3 implements Runnable {
 
         /** Vérifie le format (MP3) et l'existence du fichier,
          sinon lève FichierAudioException. */
-        public boolean LecteurMp3(FichierNumerique album) throws FichierAudioException {
+        public void LecteurMp3(FichierNumerique album) throws FichierAudioException {
             File file = album.getFichier();
 
             if (!file.exists()) {
@@ -23,7 +23,8 @@ public class LecteurMP3 implements Runnable {
             if (!file.getName().endsWith(".mp3")) {
                 throw new FichierAudioException("Le fichier n'est pas au format MP3");
             }
-            return true;
+
+            this.album = album;
         }
 
         /** Crée le thread (daemon) et le démarre.
