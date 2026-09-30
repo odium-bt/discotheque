@@ -1,13 +1,15 @@
 package application;
 
-import audio.LecteurMP3;import exceptions.AlbumIntrouvableException;
+import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;
 import modele.DisqueVinyle;
 import modele.FichierNumerique;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -29,7 +31,8 @@ public class Controller {
         System.out.println("4. Vider la discotheque");
         System.out.println("5. Rechercher un album");
         System.out.println("6. Écouter un album (MP3)");
-        System.out.println("7. Arreter l'album (MP3)");
+        System.out.println("7. Arrêter l'album (MP3)");
+        System.out.println("8. Convertir un album (MP3 vers AAC)");
         System.out.println("0. Quitter");
         System.out.print("Choix:");
         try {
@@ -194,14 +197,12 @@ public class Controller {
                 int taille = saisieTaille();
                 a = new DisqueVinyle(nomAlbum, auteur, date, quantite, num, taille);
                 break;
-            case 3:
+            case 3: // Fichier numérique
                 String format = saisieFormat();
                 double tailleFichier = saisieTailleD();
                 int duree = saisieDuree();
-                String chemin = saisieStr("Chemin du fichier (ex: music/audio.mp3) : ");
-                FichierNumerique fn = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree, chemin);
-                fn.setChemin(chemin);
-                a = fn;
+                String chemin = saisieStr("Chemin du fichier (ex: media/daftpunk.mp3) : ");
+                a = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree, chemin);
                 break;
         }
 
@@ -258,5 +259,10 @@ public class Controller {
 
     public void arreterLecture() {
         GestionAlbum.arreterLecture();
+    }
+
+    public void conversionMp3VersAac() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException, IOException, InterruptedException {
+        String n = saisieNomA();
+        GestionAlbum.conversionMp3VersAac(n);
     }
 }
