@@ -2,6 +2,7 @@ package application;
 
 import audio.LecteurMP3;import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
 import modele.CompactDisque;

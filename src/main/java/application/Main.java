@@ -2,6 +2,7 @@ package application;
 
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
 import exceptions.SaisieInvalideException;
 
 import java.io.IOException;
@@ -73,7 +74,7 @@ public class Main {
 
             } catch (SaisieInvalideException | DiscothequeVideException | AlbumIntrouvableException e) {
                 System.err.println(e.getMessage());
-            } catch (IOException | InterruptedException e) {
+            } catch (IOException | InterruptedException | FichierAudioException e) {
                 throw new RuntimeException(e);
             }
 
