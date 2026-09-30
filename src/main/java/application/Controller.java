@@ -9,6 +9,7 @@ import modele.CompactDisque;
 import modele.DisqueVinyle;
 import modele.FichierNumerique;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -30,6 +31,8 @@ public class Controller {
         System.out.println("4. Vider la discotheque");
         System.out.println("5. Rechercher un album");
         System.out.println("6. Écouter un album (MP3)");
+        System.out.println("7. Arrêter l'album (MP3)");
+        System.out.println("8. Convertir un album (MP3 vers AAC)");
         System.out.println("0. Quitter");
         System.out.print("Choix:");
         try {
@@ -251,10 +254,13 @@ public class Controller {
      */
     public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException {
         String name = saisieNomA();
-        Album a = GestionAlbum.trouveAlbum(name);
-        if (!(a instanceof FichierNumerique f)) {
-            throw new FichierAudioException("Cet album n'est pas un fichier numérique");
-        }
-        GestionAlbum.lireAlbum(f);
+        GestionAlbum.lireAlbum(name);
     }
+
+    public void conversionMp3VersAac() throws SaisieInvalideException, AlbumIntrouvableException, FichierAudioException, IOException, InterruptedException {
+        String n = saisieNomA();
+        GestionAlbum.conversionMp3VersAac(n);
+    }
+
+    ;
 }
