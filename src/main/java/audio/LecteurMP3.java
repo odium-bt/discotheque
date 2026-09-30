@@ -43,8 +43,13 @@ public class LecteurMP3 implements Runnable {
     public void demarrer() {
         if (!estEnCours()) {
             thread = new Thread(this, "Lecteur-" + album.getNomAlbum());
+
             thread.setDaemon(true);
+
+            System.out.println("Début de lecture : " + thread.getName());
             thread.start();
+        } else {
+            System.out.println("Une lecture est déjà en cours.");
         }
     }
 
@@ -53,7 +58,6 @@ public class LecteurMP3 implements Runnable {
      */
     @Override
     public void run() {
-        System.out.println("Début de lecture : " + Thread.currentThread().getName());
 
         try (FileInputStream flux = new FileInputStream(album.getFichier())) {
             this.player = new Player(flux);
