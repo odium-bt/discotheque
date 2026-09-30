@@ -1,19 +1,28 @@
 package audio;
 
 import exceptions.FichierAudioException;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
+import modele.Album;
 import modele.FichierNumerique;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class LecteurMP3 implements Runnable {
 
-        private final FichierNumerique album;
-        private volatile Player player;   // partagé entre deux threads
+        private FichierNumerique album;
+        private Player player;
         private Thread thread;
 
-        /** Vérifie le format (MP3) et l'existence du fichier,
-         sinon lève FichierAudioException. */
-        public boolean LecteurMp3(FichierNumerique album) throws FichierAudioException {
+        public LecteurMP3(FichierNumerique album) throws FichierAudioException {
+
+            if (album.getChemin() == null) {                       // ajouté ici
+                throw new FichierAudioException("Aucun chemin défini pour cet album");
+            }
+
             File file = album.getFichier();
 
             if (!file.exists()) {
@@ -22,25 +31,45 @@ public class LecteurMP3 implements Runnable {
             if (!file.getName().endsWith(".mp3")) {
                 throw new FichierAudioException("Le fichier n'est pas au format MP3");
             }
-            return true;
+            this.album = album;
         }
 
-        /** Crée le thread (daemon) et le démarre.
-         Ne fait rien si une lecture est déjà en cours. */
-        public void demarrer() { /* TODO */ }
+        public void demarrer() {
+            if (!estEnCours()) {
+                thread = new Thread(this, "Album : " + album.getNomAlbum());
+                thread.setDaemon(true);
+                thread.start();
+            }
+        }
 
-        /** Exécuté DANS le thread : ouvre le flux, crée le Player, appelle play(). */
         @Override
-        public void run() { /* TODO */ }
+        public void run() {
+            System.out.println("Début de lecture : " + Thread.currentThread().getName());
 
-        /** Arrête la lecture depuis un autre thread : player.close(). */
-        public void arreter() { /* TODO */ }
+            try (FileInputStream flux = new FileInputStream(album.getFichier())) {
+                player = new Player(flux);
+                player.play();
+            } catch (IOException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            } catch (JavaLayerException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+            System.out.println("Fin de lecture : " + Thread.currentThread().getName());
+        }
 
-        public boolean estEnCours() { /* TODO : thread.isAlive() */ }
+        public void arreter() {
+            player.close();
+        }
 
-        /** Bloque le thread appelant jusqu'à la fin de la lecture : join(). */
-        public void attendreFin() throws InterruptedException { /* TODO */ }
+        public boolean estEnCours() {
+            return thread != null && thread.isAlive();
+        }
 
-        /** Position de lecture en millisecondes. */
-        public int getPosition() { /* TODO */ }
+        public void attendreFin() throws InterruptedException {
+            thread.join();
+        }
+
+        public int getPosition() {
+            return player.getPosition();
+        }
     }

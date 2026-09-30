@@ -50,11 +50,10 @@ public class Main {
                         c.rechercherAlbum();
                         break;
                     case 6:
-                        // TODO Ecouter un album
-                        //c.ecouterAlbum();
+                        c.lectureAlbum();
                         break;
-                    // case ?:
-                    //TODO Modifier la quantité d'un album
+                     case 7:
+                        c.arreterLecture();
                     //case 7:
                     //TODO Lister les albums par support
                     //break;
@@ -63,6 +62,7 @@ public class Main {
                     //break;
                     //case 9:
                     //TODO Sauvegarder et recharger la discothèque dans un fichier texte
+                    //TODO Modifier la quantité d'un album
                     //break;
                     case 0:
                         System.out.println("Fin du programme. Au revoir !");

@@ -1,13 +1,18 @@
 package application;
 
+import audio.LecteurMP3;
 import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
+import exceptions.FichierAudioException;
+import exceptions.SaisieInvalideException;
 import modele.Album;
+import modele.FichierNumerique;
 
 import java.util.ArrayList;
 
 public class GestionAlbum {
     private static ArrayList<Album> discotheque = new ArrayList<>();
+    private static LecteurMP3 lecteur;
 
     public static void creerAlbum(Album d) {
         getDiscotheque().add(d);
@@ -78,7 +83,29 @@ public class GestionAlbum {
         }
     }
 
-    public static void lireAlbum() {
+    public static void lireAlbum(String n) throws AlbumIntrouvableException {
+        Album album = trouveAlbum(n);
+
+        if (album instanceof FichierNumerique) {
+            FichierNumerique fn = (FichierNumerique) album;
+            try {
+                LecteurMP3 lec = new LecteurMP3(fn);
+                lec.demarrer();
+                lec.attendreFin();
+            } catch (FichierAudioException | InterruptedException e) {
+                System.out.println("Erreur : " + e.getMessage());
+            }
+        } else {
+            System.out.println("Cet album n'est pas un fichier numérique, impossible de le lire.");
+        }
+    }
+
+    public static void arreterLecture() {
+        if (lecteur != null && lecteur.estEnCours()) {
+            lecteur.arreter();
+        } else {
+            System.out.println("Aucune lecture en cours.");
+        }
     }
 }
 

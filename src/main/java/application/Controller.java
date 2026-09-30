@@ -1,6 +1,6 @@
 package application;
 
-import exceptions.AlbumIntrouvableException;
+import audio.LecteurMP3;import exceptions.AlbumIntrouvableException;
 import exceptions.DiscothequeVideException;
 import exceptions.SaisieInvalideException;
 import modele.Album;
@@ -29,10 +29,7 @@ public class Controller {
         System.out.println("4. Vider la discotheque");
         System.out.println("5. Rechercher un album");
         System.out.println("6. Écouter un album (MP3)");
-        //System.out.println("6. Modifier la quantité d'un album");
-        //System.out.println("7. Lister les albums par support");
-        //System.out.println("8. Trier les albums");
-        //System.out.println("9. Sauvegarder et recharger la discothèque dans un fichier texte");
+        System.out.println("7. Arreter l'album (MP3)");
         System.out.println("0. Quitter");
         System.out.print("Choix:");
         try {
@@ -201,7 +198,10 @@ public class Controller {
                 String format = saisieFormat();
                 double tailleFichier = saisieTailleD();
                 int duree = saisieDuree();
-                a = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree);
+                String chemin = saisieStr("Chemin du fichier (ex: music/audio.mp3) : ");
+                FichierNumerique fn = new FichierNumerique(nomAlbum, auteur, date, quantite, format, tailleFichier, duree);
+                fn.setChemin(chemin);
+                a = fn;
                 break;
         }
 
@@ -251,7 +251,12 @@ public class Controller {
     /**
      * Lecture d'album
      */
-    public void lectureAlbum() throws SaisieInvalideException {
-        String name = saisieNomA();
+    public void lectureAlbum() throws SaisieInvalideException, AlbumIntrouvableException {
+        String n = saisieNomA();
+        GestionAlbum.lireAlbum(n);
+    }
+
+    public void arreterLecture() {
+        GestionAlbum.arreterLecture();
     }
 }
